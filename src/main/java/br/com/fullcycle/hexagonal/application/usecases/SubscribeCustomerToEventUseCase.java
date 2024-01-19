@@ -25,11 +25,11 @@ public class SubscribeCustomerToEventUseCase extends UseCase<SubscribeCustomerTo
         var customer = customerService.findById(input.customerId())
                 .orElseThrow(() -> new ValidationException("Customer not found"));
 
-        var event = eventService.findById(input.eventId)
+        var event = eventService.findById(input.eventId())
                 .orElseThrow(() -> new ValidationException("Event not found"));
 
 
-        eventService.findTicketByEventIdAndCustomerId(input.eventId, input.customerId)
+        eventService.findTicketByEventIdAndCustomerId(input.eventId(), input.customerId())
                 .ifPresent(t -> {
                     throw new ValidationException("Email already registered");
                 });
