@@ -24,8 +24,8 @@ public class InMemoryCustomerRepository implements CustomerRepository {
     @Override
     public Customer create(final Customer customer) {
         this.customers.put(customer.customerId().value().toString(), customer);
-        this.customersByCpf.put(customer.cpf(), customer);
-        this.customersByEmail.put(customer.email(), customer);
+        this.customersByCpf.put(customer.cpf().value(), customer);
+        this.customersByEmail.put(customer.email().value(), customer);
         return customer;
     }
 
@@ -36,12 +36,12 @@ public class InMemoryCustomerRepository implements CustomerRepository {
 
     @Override
     public Optional<Customer> customerOfCpf(final String cpf) {
-        return Optional.ofNullable(this.customers.get(Objects.requireNonNull(cpf)));
+        return Optional.ofNullable(this.customersByCpf.get(Objects.requireNonNull(cpf)));
     }
 
     @Override
     public Optional<Customer> customerOfEmail(final String email) {
-        return Optional.ofNullable(this.customers.get(Objects.requireNonNull(email)));
+        return Optional.ofNullable(this.customersByEmail.get(Objects.requireNonNull(email)));
     }
 
     @Override
