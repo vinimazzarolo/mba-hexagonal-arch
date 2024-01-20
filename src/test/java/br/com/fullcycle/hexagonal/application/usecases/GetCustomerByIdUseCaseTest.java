@@ -24,7 +24,7 @@ class GetCustomerByIdUseCaseTest {
         final var customerRepository = new InMemoryCustomerRepository();
         customerRepository.create(aCustomer);
 
-        final var expectedID = aCustomer.customerId().value().toString();
+        final var expectedID = aCustomer.customerId().value();
 
         final var input = new GetCustomerByIdUseCase.Input(expectedID);
 

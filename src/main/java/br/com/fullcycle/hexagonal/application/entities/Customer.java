@@ -1,13 +1,18 @@
 package br.com.fullcycle.hexagonal.application.entities;
 
+import br.com.fullcycle.hexagonal.application.exceptions.ValidationException;
+
 public class Customer {
 
-    private CustomerId customerId;
+    private final CustomerId customerId;
     private Name name;
     private Cpf cpf;
     private Email email;
 
     public Customer(final CustomerId customerId, final String name, final String cpf, final String email) {
+        if (customerId == null) {
+            throw new ValidationException("Invalid value for CustomerId");
+        }
         this.customerId = customerId;
         this.name = new Name(name);
         this.cpf = new Cpf(cpf);
