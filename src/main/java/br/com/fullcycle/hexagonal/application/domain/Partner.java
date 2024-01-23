@@ -1,4 +1,4 @@
-package br.com.fullcycle.hexagonal.application.entities;
+package br.com.fullcycle.hexagonal.application.domain;
 
 import br.com.fullcycle.hexagonal.application.exceptions.ValidationException;
 
@@ -14,9 +14,9 @@ public class Partner {
             throw new ValidationException("Invalid value for PartnerId");
         }
         this.partnerId = partnerId;
-        this.name = new Name(name);
-        this.cnpj = new Cnpj(cnpj);
-        this.email = new Email(email);
+        this.setName(name);
+        this.setCnpj(cnpj);
+        this.setEmail(email);
     }
 
     public static Partner newPartner(final String name, final String cnpj, final String email) {
@@ -37,5 +37,17 @@ public class Partner {
 
     public Email email() {
         return email;
+    }
+
+    private void setName(final String name) {
+        this.name = new Name(name);
+    }
+
+    private void setCnpj(final String cnpj) {
+        this.cnpj = new Cnpj(cnpj);
+    }
+
+    private void setEmail(final String email) {
+        this.email = new Email(email);
     }
 }

@@ -1,16 +1,16 @@
 package br.com.fullcycle.hexagonal.application.repositories;
 
-import br.com.fullcycle.hexagonal.application.domain.Event;
-import br.com.fullcycle.hexagonal.application.domain.EventId;
+import br.com.fullcycle.hexagonal.application.domain.Ticket;
+import br.com.fullcycle.hexagonal.application.domain.TicketId;
 
 import java.util.Optional;
 
-public interface EventRepository {
+public interface TicketRepository {
 
-    Optional<Event> eventOfId(EventId eventId);
+    Optional<Ticket> ticketOfId(TicketId ticketId);
 
-    Event create(Event customer);
+    Ticket create(Ticket ticket);
 
-    Event update(Event customer);
+    Ticket update(Ticket ticket);
 
 }

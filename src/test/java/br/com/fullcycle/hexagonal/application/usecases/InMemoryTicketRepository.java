@@ -1,51 +1,36 @@
-package br.com.fullcycle.hexagonal.application;
+package br.com.fullcycle.hexagonal.application.usecases;
 
-import br.com.fullcycle.hexagonal.application.domain.Customer;
-import br.com.fullcycle.hexagonal.application.domain.CustomerId;
-import br.com.fullcycle.hexagonal.application.repositories.CustomerRepository;
+import br.com.fullcycle.hexagonal.application.domain.Ticket;
+import br.com.fullcycle.hexagonal.application.domain.TicketId;
+import br.com.fullcycle.hexagonal.application.repositories.TicketRepository;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 
-public class InMemoryCustomerRepository implements CustomerRepository {
+public class InMemoryTicketRepository implements TicketRepository {
 
-    private final Map<String, Customer> customers;
-    private final Map<String, Customer> customersByCpf;
-    private final Map<String, Customer> customersByEmail;
+    private final Map<String, Ticket> tickets;
 
-    public InMemoryCustomerRepository() {
-        this.customers = new HashMap<>();
-        this.customersByCpf = new HashMap<>();
-        this.customersByEmail = new HashMap<>();
+    public InMemoryTicketRepository() {
+        this.tickets = new HashMap<>();
     }
 
     @Override
-    public Customer create(final Customer customer) {
-        this.customers.put(customer.customerId().value().toString(), customer);
-        this.customersByCpf.put(customer.cpf().value(), customer);
-        this.customersByEmail.put(customer.email().value(), customer);
-        return customer;
+    public Optional<Ticket> ticketOfId(TicketId ticketId) {
+        return Optional.ofNullable(this.tickets.get(Objects.requireNonNull(ticketId).value()));
     }
 
     @Override
-    public Customer update(Customer customer) {
-        return null;
+    public Ticket create(final Ticket ticket) {
+        this.tickets.put(ticket.ticketId().value(), ticket);
+        return ticket;
     }
 
     @Override
-    public Optional<Customer> customerOfCpf(final String cpf) {
-        return Optional.ofNullable(this.customersByCpf.get(Objects.requireNonNull(cpf)));
-    }
-
-    @Override
-    public Optional<Customer> customerOfEmail(final String email) {
-        return Optional.ofNullable(this.customersByEmail.get(Objects.requireNonNull(email)));
-    }
-
-    @Override
-    public Optional<Customer> customerOfId(final CustomerId id) {
-        return Optional.ofNullable(this.customers.get(Objects.requireNonNull(id).value().toString()));
+    public Ticket update(Ticket ticket) {
+        this.tickets.put(ticket.ticketId().value(), ticket);
+        return ticket;
     }
 }
