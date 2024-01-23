@@ -1,7 +1,7 @@
 package br.com.fullcycle.hexagonal.application.repositories;
 
-import br.com.fullcycle.hexagonal.application.domain.Ticket;
-import br.com.fullcycle.hexagonal.application.domain.TicketId;
+import br.com.fullcycle.hexagonal.application.domain.ticket.Ticket;
+import br.com.fullcycle.hexagonal.application.domain.ticket.TicketId;
 
 import java.util.Optional;
 
