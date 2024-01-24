@@ -3,10 +3,9 @@ package br.com.fullcycle.hexagonal.application.usecases.event;
 import br.com.fullcycle.hexagonal.IntegrationTest;
 import br.com.fullcycle.hexagonal.application.domain.partner.PartnerId;
 import br.com.fullcycle.hexagonal.application.exceptions.ValidationException;
-import br.com.fullcycle.hexagonal.application.usecases.event.CreateEventUseCase;
-import br.com.fullcycle.hexagonal.infrastructure.models.Partner;
-import br.com.fullcycle.hexagonal.infrastructure.repositories.EventRepository;
-import br.com.fullcycle.hexagonal.infrastructure.repositories.PartnerRepository;
+import br.com.fullcycle.hexagonal.infrastructure.jpa.entities.PartnerEntity;
+import br.com.fullcycle.hexagonal.infrastructure.jpa.repositories.EventJpaRepository;
+import br.com.fullcycle.hexagonal.infrastructure.jpa.repositories.PartnerJpaRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,15 +18,15 @@ class CreateEventUseCaseIT extends IntegrationTest {
     private CreateEventUseCase useCase;
 
     @Autowired
-    private PartnerRepository partnerRepository;
+    private PartnerJpaRepository partnerJpaRepository;
 
     @Autowired
-    private EventRepository eventRepository;
+    private EventJpaRepository eventJpaRepository;
 
     @BeforeEach
     void tearDown() {
-        partnerRepository.deleteAll();
-        eventRepository.deleteAll();
+        partnerJpaRepository.deleteAll();
+        eventJpaRepository.deleteAll();
     }
 
     @Test
@@ -70,11 +69,11 @@ class CreateEventUseCaseIT extends IntegrationTest {
         Assertions.assertEquals(expectedError, actualException.getMessage());
     }
 
-    private Partner createPartner(final String cnpj, final String name, final String email) {
-        final var partner = new Partner();
+    private PartnerEntity createPartner(final String cnpj, final String name, final String email) {
+        final var partner = new PartnerEntity();
         partner.setCnpj(cnpj);
         partner.setName(name);
         partner.setEmail(email);
-        return partnerRepository.save(partner);
+        return partnerJpaRepository.save(partner);
     }
 }

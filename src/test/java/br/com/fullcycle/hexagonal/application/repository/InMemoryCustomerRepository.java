@@ -2,6 +2,8 @@ package br.com.fullcycle.hexagonal.application.repository;
 
 import br.com.fullcycle.hexagonal.application.domain.customer.Customer;
 import br.com.fullcycle.hexagonal.application.domain.customer.CustomerId;
+import br.com.fullcycle.hexagonal.application.domain.person.Cpf;
+import br.com.fullcycle.hexagonal.application.domain.person.Email;
 import br.com.fullcycle.hexagonal.application.repositories.CustomerRepository;
 
 import java.util.HashMap;
@@ -35,13 +37,13 @@ public class InMemoryCustomerRepository implements CustomerRepository {
     }
 
     @Override
-    public Optional<Customer> customerOfCpf(final String cpf) {
-        return Optional.ofNullable(this.customersByCpf.get(Objects.requireNonNull(cpf)));
+    public Optional<Customer> customerOfCpf(final Cpf cpf) {
+        return Optional.ofNullable(this.customersByCpf.get(Objects.requireNonNull(cpf.value())));
     }
 
     @Override
-    public Optional<Customer> customerOfEmail(final String email) {
-        return Optional.ofNullable(this.customersByEmail.get(Objects.requireNonNull(email)));
+    public Optional<Customer> customerOfEmail(final Email email) {
+        return Optional.ofNullable(this.customersByEmail.get(Objects.requireNonNull(email.value())));
     }
 
     @Override
