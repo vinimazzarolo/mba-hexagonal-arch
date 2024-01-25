@@ -37,6 +37,13 @@ public class InMemoryPartnerRepository implements PartnerRepository {
     }
 
     @Override
+    public void deleteAll() {
+        this.partners.clear();
+        this.partnersByCnpj.clear();
+        this.partnersByEmail.clear();
+    }
+
+    @Override
     public Optional<Partner> partnerOfCnpj(final Cnpj cnpj) {
         return Optional.ofNullable(this.partnersByCnpj.get(Objects.requireNonNull(cnpj.value())));
     }

@@ -1,4 +1,4 @@
-package br.com.fullcycle.hexagonal.application.domain.ticket;
+package br.com.fullcycle.hexagonal.application.domain.event.ticket;
 
 import br.com.fullcycle.hexagonal.application.exceptions.ValidationException;
 

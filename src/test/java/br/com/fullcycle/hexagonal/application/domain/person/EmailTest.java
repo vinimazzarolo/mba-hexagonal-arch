@@ -1,4 +1,4 @@
-package br.com.fullcycle.hexagonal.application.person;
+package br.com.fullcycle.hexagonal.application.domain.person;
 
 import br.com.fullcycle.hexagonal.application.domain.person.Email;
 import br.com.fullcycle.hexagonal.application.exceptions.ValidationException;

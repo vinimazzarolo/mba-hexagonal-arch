@@ -2,23 +2,20 @@ package br.com.fullcycle.hexagonal.infrastructure.jpa.entities;
 
 import br.com.fullcycle.hexagonal.application.domain.customer.CustomerId;
 import br.com.fullcycle.hexagonal.application.domain.event.EventId;
-import br.com.fullcycle.hexagonal.application.domain.ticket.Ticket;
-import br.com.fullcycle.hexagonal.application.domain.ticket.TicketId;
-import br.com.fullcycle.hexagonal.application.domain.ticket.TicketStatus;
+import br.com.fullcycle.hexagonal.application.domain.event.ticket.Ticket;
+import br.com.fullcycle.hexagonal.application.domain.event.ticket.TicketId;
+import br.com.fullcycle.hexagonal.application.domain.event.ticket.TicketStatus;
 import jakarta.persistence.*;
 
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 
-import static jakarta.persistence.GenerationType.IDENTITY;
-
-@Entity
+@Entity(name = "Ticket")
 @Table(name = "tickets")
 public class TicketEntity {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
     private UUID id;
 
     private UUID customerId;
@@ -35,7 +32,14 @@ public class TicketEntity {
     public TicketEntity() {
     }
 
-    public TicketEntity(final UUID id, final UUID customerId, final UUID eventId, final TicketStatus status, final Instant paidAt, final Instant reservedAt) {
+    public TicketEntity(
+            final UUID id,
+            final UUID customerId,
+            final UUID eventId,
+            final TicketStatus status,
+            final Instant paidAt,
+            final Instant reservedAt
+    ) {
         this.id = id;
         this.customerId = customerId;
         this.eventId = eventId;

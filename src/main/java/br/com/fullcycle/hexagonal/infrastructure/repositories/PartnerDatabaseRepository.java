@@ -55,4 +55,9 @@ public class PartnerDatabaseRepository implements PartnerRepository {
     public Partner update(Partner customer) {
         return this.partnerJpaRepository.save(PartnerEntity.of(customer)).toPartner();
     }
+
+    @Override
+    public void deleteAll() {
+        this.partnerJpaRepository.deleteAll();
+    }
 }

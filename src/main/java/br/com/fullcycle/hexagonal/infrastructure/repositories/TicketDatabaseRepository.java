@@ -1,7 +1,7 @@
 package br.com.fullcycle.hexagonal.infrastructure.repositories;
 
-import br.com.fullcycle.hexagonal.application.domain.ticket.Ticket;
-import br.com.fullcycle.hexagonal.application.domain.ticket.TicketId;
+import br.com.fullcycle.hexagonal.application.domain.event.ticket.Ticket;
+import br.com.fullcycle.hexagonal.application.domain.event.ticket.TicketId;
 import br.com.fullcycle.hexagonal.application.repositories.TicketRepository;
 import br.com.fullcycle.hexagonal.infrastructure.jpa.entities.TicketEntity;
 import br.com.fullcycle.hexagonal.infrastructure.jpa.repositories.TicketJpaRepository;
@@ -39,5 +39,10 @@ public class TicketDatabaseRepository implements TicketRepository {
     @Transactional
     public Ticket update(Ticket customer) {
         return this.ticketJpaRepository.save(TicketEntity.of(customer)).toTicket();
+    }
+
+    @Override
+    public void deleteAll() {
+        this.ticketJpaRepository.deleteAll();
     }
 }
